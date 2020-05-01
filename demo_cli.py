@@ -16,6 +16,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
+    parser.add_argument("-f", "--input_audio", type=Path, default="input.wav")
     parser.add_argument("-e", "--enc_model_fpath", type=Path, 
                         default="encoder/saved_models/pretrained.pt",
                         help="Path to a saved encoder")
@@ -121,9 +122,11 @@ if __name__ == '__main__':
     while True:
         try:
              # Get the reference audio filepath
-            message = "Reference voice: enter an audio filepath of a voice to be cloned (mp3, " \
+            #message = "Reference voice: enter an audio filepath of a voice to be cloned (mp3, " \
                       "wav, m4a, flac, ...):\n"
-            in_fpath = input(str(message).replace("\"", '').replace("\'", ''))
+            #in_fpath = input(str(message).replace("\"", '').replace("\'", ''))
+            print("Getting file ", args.input_audio)
+            in_fpath = args.input_audio
             
             
             ## Computing the embedding
@@ -187,4 +190,3 @@ if __name__ == '__main__':
         except Exception as e:
             print("Caught exception: %s" % repr(e))
             print("Restarting\n")
-        
